@@ -1,20 +1,36 @@
 plugins {
     id 'java'
+    id 'org.springframework.boot' version '3.2.0'
+    id 'io.spring.dependency-management' version '1.1.4'
 }
 
-group = 'com.orsi'
-version = '1.0-SNAPSHOT'
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '21'
+}
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    // Spring Boot and JPA
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // H2 Database
+    runtimeOnly 'com.h2database:h2'
+
+    // Testing - Spring Boot starter includes JUnit 5 and Mockito
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // JetBrains annotations for @TestOnly
+    compileOnly 'org.jetbrains:annotations:24.1.0'
 }
 
 test {
     useJUnitPlatform()
 }
+
